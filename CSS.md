@@ -187,7 +187,57 @@ float：left+overflow：hiden 构建bfc
     </style>
 ```
 
+# CSS实现
 
+![](C:\Users\Cuizhufan\Desktop\学习\HTML-CSS-JS\CSS_Interview\css图形.png)
+
+```css
+1、一根0.5px的线 scaleY(0.5)
+.line{
+            margin-top: 100px;
+            background-color: black;
+            height: 1px;
+            transform: scaleY(0.5);
+        }
+2、实现三角形
+使用border边框实现
+.sanjiaoxing{
+            margin: auto;
+            width: 0;
+            height: 0;
+            border-top: 200px solid red;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+           
+        }
+3、实现题型，三角形基础上加上 width或者height
+.tixing{
+    width: 50px;
+    height: 0px;
+    margin: auto;
+    border-bottom: 50px solid red;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+}
+4、圆形，设置半径
+.yuan{
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    background-color: red;
+    border-radius: 50%;
+}
+5、实现扇形，三角形基础上设置半径
+.shanxing{
+    width: 0px;
+    height: 0px;
+    margin: auto;
+    border-top: 200px solid red;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-radius: 50%;
+}
+```
 
 # BFC
 
@@ -250,7 +300,11 @@ Block format context ,块级格式化上下文;
 
 1flex弹性布局，flex容器设置属性   justify-content: center;    align-items:center;
 
-2子绝父相，子元素用相对定位，结合transform平移，或者设置margin-top，margin-left
+2grid栅格布局 父元素display：grid；align-items：center；
+
+3子绝父相，子元素用相对定位，结合transform translate平移，
+
+4子绝父相，设置margin-top，margin-left（已知宽高）
 
 ```css
 .child{
@@ -274,7 +328,7 @@ Block format context ,块级格式化上下文;
 
 ```
 
-3子绝父相，子元素用相对定位，在设置margin auto
+5子绝父相，子元素用相对定位，定位上下左右为0，在设置margin auto
 
 ```css
 .child{
@@ -288,6 +342,52 @@ Block format context ,块级格式化上下文;
             margin: auto;
 }
 ```
+
+6子绝父相+css函数calc（）动态计算（已知宽高）
+
+```css
+#parent6{
+            position: relative;
+            height: 100px;
+            width: 100px;
+            margin: 10px auto;
+            background-color: black;
+            
+        }
+#child6{    
+            position:absolute;
+            height: 50px;
+            width: 50px;
+            left: calc(50% - 25px);
+            top: calc(50% - 25px);
+            background-color: blue;
+        }
+```
+
+7父元素使用table-cell，设置text-algin：center，vertical-algin：middle。注意父元素需要用一级display：table包裹，子元素需要设置margin：auto。继承来的margin：0不能居中。
+
+```css
+.table{
+            display: table;
+            height: 100px;
+            width: 100px;
+            background-color: black;
+            margin: 10px auto;
+        }
+        #parent5{
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+        #child5{    
+            margin: auto;/* 父元素的text-align会受margin：0影响*/
+            height: 50px;
+            width: 50px;
+            background-color: blue;
+        }
+```
+
+
 
 # 解决margin塌陷问题
 
@@ -319,7 +419,7 @@ Block format context ,块级格式化上下文;
 
 # css动画
 
-1、transform
+1、transform变换
 
 用于元素旋转 
 
@@ -329,11 +429,11 @@ Block format context ,块级格式化上下文;
 
 倾斜skew等效果
 
-2、transition
+2、transition过渡
 
 允许css属性值在一定的时间区域内平滑的过渡，需要事件的触发，例如单击，获取焦点，失去焦点，只能定义开始状态和结束状态，不能定义中间状态，也就是说只有**两个状态**。
 
-3、animation
+3、animation动画
 
 更加复杂一些，它允许你按照实际需求添加很多的keyframes来创建动画。它可以自动触发，并且可以循环。通过 @keyframes来定义关键帧。from 表示最开始的那一帧，to 表示结束时的那一帧。单独定义keyframes的好处是我们可以复用这些动画。
 

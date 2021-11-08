@@ -1,3 +1,103 @@
+# git：分布式版本控制
+
+与svn集中版本控制不同，git是分布式的，由本地的版本库，在本地管理版本。
+
+## 基本操作
+
+创建目录 并初始化：git init，生成.git文件：
+
+![image-20210727124916736](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727124916736.png)
+
+设置签名：
+
+git config user.name Cuizhufan
+
+git config  user.email 1435820234@qq.com
+
+
+
+git status 查看状态（工作区，缓存区）
+
+git add [file name]将文件添加至缓存区。修改的未提交至缓冲区的文件，git status显示为红色，git add 后变为绿色。
+
+![image-20210727131107815](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727131107815.png)
+
+git commit 提交至本地库，并输入修改信息。
+
+git commit -m "修改信息" 文件名。//不用打开vim编辑器，填写修改信息
+
+完成后：
+
+![image-20210727131659394](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727131659394.png)
+
+## 版本的前进后退
+
+git log 查看提交的记录：
+
+![image-20210727133146976](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727133146976.png)
+
+git log --pretty=oneline 显示简洁一些
+
+![image-20210727133312426](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727133312426.png)
+
+ git log --oneline 更简洁
+
+![image-20210727133533990](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727133533990.png)
+
+git log reflog 显示当前版本到某一版本需要几步
+
+![image-20210727133815183](C:\Users\agent\AppData\Roaming\Typora\typora-user-images\image-20210727133815183.png)
+
+git reset --hard [索引值]：基于索引值的前进后退
+
+git reset命令的三个参数对比：
+
+--soft参数：
+
+仅仅在本地库移动head指针
+
+--mixed参数：
+
+在本地库移动head指针
+
+并重置缓存区
+
+--hard参数：
+
+在本地库移动head指针
+
+重置缓存区
+
+重置工作区
+
+## 比较文件差异 
+
+git diff [file name] 将工作区的文件与暂存区的对应文件的比较
+
+git diff [本地库中历史版本 ] [file name] 将工作区的文件和本地库历史记录比较 例如和上一个版本比较：
+
+git diff HEAD^ [filename]
+
+不指定文件名的时候会比较工作区下的所有文件
+
+## 分支操作
+
+创建分支：giit branch [分支名]
+
+查看分支：git branch -v
+
+切换分支： git checkout [分支名]
+
+合并分支：
+
+​	第一步：切换到接受修改的分支（被合并，增加新内容）
+
+​	git checkout [分支名]
+
+​	第二步：执行merge命令
+
+​	git merge [分支名]
+
 # git操作指令
 
 新增文件的命令：git add file或者git add .
