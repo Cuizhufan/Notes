@@ -73,8 +73,6 @@ CSS
 
 注意：有一些标签自身含有默认得样式 例如 <a>默认颜色是蓝色
 
-
-
 ```css
 div.box h1#title  //权重：0112
 #article h1.title  //权重 0111
@@ -143,48 +141,14 @@ div.box h1#title  //权重：0112
 
 实现方法：
 
-1使用flex布局（主流）
-
-父容器设置display:flex，定宽元素设置flex-basis或者width，自适应元素设置flex:1或者flex-grow:1
-
 ```css
-  .box {
-            height: 100px;
-            display: flex;
-        }
-        .left {
-            height: 100px;
-            width: 300px;
-        }
-        .right {
-            height: 100px;
-            flex: 1;    /* 比例设置为1，撑满剩余空间 == flex: 1 1 0%  */
-        }
-
-```
-
-2浮动实现
-
-float：left +margin-left：-width
-
-float：left+overflow：hiden 构建bfc
-
-```css
- <style type="text/css">
-      .box {
-          height: 100px;
-       }
-      .left {
-          height: 100px;
-          width: 300px;
-          float: left;
-        }
-       .right {
-          height: 100px;
-          margin-left: 300px; /* 方法1：左浮动，右margin*/
-          overflow: hidden; /* 方法2：左浮动，右hidden(右边的盒子就变成了一个绝缘的盒子，BFC中治理高度塌陷)*/
-        }
-    </style>
+1、float + margin-left
+2、float + BFC（overflow：hiden）
+3、position：absolute + margin-left
+4、双float + calc函数计算自适应宽度：calc（100%-200px）
+5、双inline-block + calc函数计算自适应宽度：calc（100%-200px），注意间隙需要用font-size：0去除
+6、dispaly：table-cell 要设置宽度width：100%
+7、display：flex  
 ```
 
 # CSS实现
@@ -300,7 +264,7 @@ Block format context ,块级格式化上下文;
 
 1flex弹性布局，flex容器设置属性   justify-content: center;    align-items:center;
 
-2grid栅格布局 父元素display：grid；align-items：center；
+2grid栅格布局 父元素display：grid；justify-items:center, align-items：center；
 
 3子绝父相，子元素用相对定位，结合transform translate平移，
 
@@ -316,14 +280,13 @@ Block format context ,块级格式化上下文;
         transform: translate(-50%,-50%);
     }
 .child{
-    width: 100px;
-            height: 150px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -75px;
-            margin-left: -50px;
-
+    	width: 100px;
+        height: 150px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -75px;
+        margin-left: -50px;
 }
 
 ```
